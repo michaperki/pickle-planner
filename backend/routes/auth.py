@@ -4,9 +4,9 @@ from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@bp.route('/register', methods=['POST'])
+@auth_bp.route('/register', methods=['POST'])
 def register():
     # Handle user registration logic here
     username = request.json.get('username')
@@ -15,7 +15,7 @@ def register():
     # Check if username already exists
     existing_user = User.query.filter_by(username=username).first()
     if existing_user:
-        return jsonify({"error": "Username already exists"}), 400
+        return jsonify({"error": "Username already exists"}, 400)
 
     # Create a new user
     new_user = User(username=username, password=generate_password_hash(password))
@@ -24,7 +24,7 @@ def register():
 
     return jsonify({"message": "User registered successfully"})
 
-@bp.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
     username = request.json.get('username')
     password = request.json.get('password')
@@ -34,9 +34,9 @@ def login():
         login_user(user)
         return jsonify({"message": "Login successful"})
     else:
-        return jsonify({"error": "Login failed"}), 401
+        return jsonify({"error": "Login failed"}, 401)
 
-@bp.route('/logout')
+@auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()

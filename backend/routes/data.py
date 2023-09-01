@@ -2,9 +2,9 @@ from flask import Blueprint, jsonify
 from models import Pet  # Import your database model
 from flask_login import login_required
 
-bp = Blueprint('data', __name__, url_prefix='/data')
+data_bp = Blueprint('data', __name__, url_prefix='/data')
 
-@bp.route('/pets')
+@data_bp.route('/pets')
 @login_required
 def get_pets():
     # Retrieve pet data from the database or other data source
