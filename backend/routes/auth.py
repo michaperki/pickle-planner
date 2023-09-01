@@ -11,14 +11,20 @@ def register():
     # Handle user registration logic here
     username = request.json.get('username')
     password = request.json.get('password')
+    email = request.json.get('email')  # Get the email from the request
 
-    # Check if username already exists
+    # Check if username or email already exists
     existing_user = User.query.filter_by(username=username).first()
+    existing_email = User.query.filter_by(email=email).first()
+    
     if existing_user:
         return jsonify({"error": "Username already exists"}, 400)
+    if existing_email:
+        return jsonify({"error": "Email already exists"}, 400)
 
-    # Create a new user
-    new_user = User(username=username, password=generate_password_hash(password))
+    # Create a new user with the password hash and email
+    new_user = User(username=username, email=email)
+    new_user.set_password(password)  # Set the password hash
     db.session.add(new_user)
     db.session.commit()
 
