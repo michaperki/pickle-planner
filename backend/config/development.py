@@ -14,3 +14,5 @@ class DevelopmentConfig:
 
     # CORS Configuration (if needed for frontend development)
     CORS_ALLOWED_ORIGINS = ['http://localhost:3000']  # Replace with your frontend URL
+    
+    JWT_SECRET_KEY = 'temp'

@@ -4,6 +4,7 @@ from config import DevelopmentConfig, TestingConfig
 from extensions import db, login_manager
 from models.user import User
 from routes import auth, data, errors
+from flask_jwt_extended import JWTManager
 
 def create_app(config_name='development'):
     app = Flask(__name__)
@@ -19,6 +20,9 @@ def create_app(config_name='development'):
     login_manager.init_app(app)
     with app.app_context():
         db.create_all()
+        
+    # Configure token-based authentication
+    jwt = JWTManager(app)
 
     # Register blueprints for routes
     app.register_blueprint(auth.auth_bp)

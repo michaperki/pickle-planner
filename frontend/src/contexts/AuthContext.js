@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.js
 import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
@@ -8,23 +7,25 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null); // Manage user authentication state here
+  const [token, setToken] = useState(null);
 
-  const login = (user) => {
-    // Implement login logic here
+  const login = (accessToken) => {
+    setToken(accessToken); // Store the token
   };
 
   const logout = () => {
-    // Implement logout logic here
+    setToken(null); // Clear token
   };
 
-  const register = (user) => {
-    // Implement registration logic here
+  const isAuthenticated = () => !!token; // Check if a token exists
+  const user = isAuthenticated() ? {} : null;
+
+  const value = {
+    isAuthenticated,
+    login,
+    logout,
+    user,
   };
 
-  return (
-    <AuthContext.Provider value={{ currentUser, login, logout, register }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

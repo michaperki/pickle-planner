@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
 from extensions import db
 from models import User
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_jwt_extended import create_access_token, jwt_required
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -36,14 +37,27 @@ def login():
     password = request.json.get('password')
 
     user = User.query.filter_by(username=username).first()
-    if user and check_password_hash(user.password_hash, password):
-        login_user(user)
-        return jsonify({"message": "Login successful"})
+    if user:
+        print("User exists")
+        if check_password_hash(user.password_hash, password):
+            print("Password check successful")
+            access_token = create_access_token(identity=username)
+            login_user(user)
+            return jsonify({"access_token": access_token})
+        else:
+            print("Password check failed")
     else:
-        return jsonify({"error": "Login failed"}, 401)
+        print("User does not exist")
+    return jsonify({"error": "Login failed"}, 401)
 
 @auth_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
     return jsonify({"message": "Logout successful"})
+
+@auth_bp.route('/protected', methods=['GET'])
+@jwt_required()
+def protected_route():
+    # Access the current user using current_user identity
+    return jsonify(message="This is a protected route")
