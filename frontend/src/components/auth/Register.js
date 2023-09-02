@@ -1,19 +1,64 @@
 // src/components/auth/Register.js
-import React from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import React, { useState } from 'react';
+import { registerUser } from '../../services/api';
 
 const Register = () => {
-  const { register } = useAuth();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
 
-  const handleRegister = () => {
-    // Implement registration functionality here
+  const handleRegister = async () => {
+    try {
+      const response = await registerUser(formData);
+      // Registration was successful, you can handle the response or redirect here
+    } catch (error) {
+      // Registration failed, handle the error
+      console.error('Registration error:', error.message);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <div>
       <h2>Register</h2>
-      {/* Implement registration form and button */}
-      <button onClick={handleRegister}>Register</button>
+      <form>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+        </div>
+        <button type="button" onClick={handleRegister}>
+          Register
+        </button>
+      </form>
     </div>
   );
 };
