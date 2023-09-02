@@ -3,7 +3,7 @@ import Home from './components/pages/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/pages/Dashboard';
-import Navigation from './components/layout/Navigation';
+import Header from './components/layout/Header';
 import { useAuth } from './contexts/AuthContext';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ function AppRoutes() {
 
   return (
     <Router>
-      <Navigation />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
