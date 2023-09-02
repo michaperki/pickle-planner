@@ -1,10 +1,16 @@
-import './styles/tailwind.css';
+// src/App.js
+import React from 'react';
+import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import AppRoutes from './AppRoutes';
 
 function App() {
   return (
-    <div className="bg-blue-500 p-4">
-      <h1 className="text-3xl font-semibold text-white">My Template App</h1>
-    </div>
+    <AuthProvider>
+      <ThemeProvider>
+        <AppRoutes />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
