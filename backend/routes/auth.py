@@ -36,7 +36,7 @@ def login():
     password = request.json.get('password')
 
     user = User.query.filter_by(username=username).first()
-    if user and check_password_hash(user.password, password):
+    if user and check_password_hash(user.password_hash, password):
         login_user(user)
         return jsonify({"message": "Login successful"})
     else:

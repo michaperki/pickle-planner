@@ -27,5 +27,27 @@ class TestAuthRoutes:
         assert b'User registered successfully' in response.data
 
     def test_login_route(self, client):
-        # Similar structure for testing the login route
-        pass
+        url = '/auth/login'
+        data = {'username': 'test_user', 'password': 'test_password'}
+
+        response = client.post(url, json=data)
+
+        assert response.status_code == 200
+        assert b'Login successful' in response.data
+
+    def test_logout_route(self, client):
+        # Log in the user first (you should adjust this based on your login route test)
+        login_url = '/auth/login'
+        login_data = {'username': 'test_user', 'password': 'test_password'}
+
+        response = client.post(login_url, json=login_data)
+
+        assert response.status_code == 200
+
+        # Now, log the user out
+        logout_url = '/auth/logout'
+
+        response = client.get(logout_url)  # Use GET to access the logout route
+
+        assert response.status_code == 200
+        assert b'Logout successful' in response.data
