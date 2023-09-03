@@ -3,7 +3,6 @@
 
 # Usage
 To use this template, run 
-    ```bash
     
     git clone git@github.com:michaperki/FirebaseTemplate.git myApp
     cd myApp
