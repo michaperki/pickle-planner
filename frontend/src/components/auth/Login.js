@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState(''); // Update state variable name to 'email'
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleLogin = async () => {
         try {
-            const response = await loginUser(username, password);
+            const response = await loginUser(email, password); // Update API function call to use 'email'
 
             if (response.access_token) {
                 login(response.access_token); // Store the token in your authentication context
@@ -31,12 +31,12 @@ const Login = () => {
         <div>
             <h2>Login</h2>
             <div>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="email">Email:</label>
                 <input
                     type="text"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)} // Update state update function to 'setEmail'
                 />
             </div>
             <div>
@@ -55,3 +55,4 @@ const Login = () => {
 };
 
 export default Login;
+

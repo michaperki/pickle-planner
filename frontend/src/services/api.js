@@ -1,14 +1,14 @@
 // src/services/api.js
 const apiUrl = 'http://127.0.0.1:5000'; // Replace with your actual API URL
 
-export const loginUser = async (username, password) => {
+export const loginUser = async (email, password) => {
     try {
         const response = await fetch(`${apiUrl}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ email, password }),
         });
 
         if (!response.ok) {
