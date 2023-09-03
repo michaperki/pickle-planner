@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { logoutUser } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setToken(null); // Clear token
+    setToken(null); // Clear the token
   };
 
   const isAuthenticated = () => !!token; // Check if a token exists
@@ -29,3 +30,4 @@ export const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+

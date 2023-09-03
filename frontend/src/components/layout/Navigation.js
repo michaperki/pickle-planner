@@ -1,10 +1,17 @@
-// src/components/layout/Navigation.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Navigation = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout(); // Trigger the logout logic
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   return (
     <nav>
@@ -23,7 +30,7 @@ const Navigation = () => {
           </>
         ) : (
           <li>
-            <Link to="/logout">Logout</Link> {/* Renders "Logout" when the user is logged in */}
+            <Link to="/" onClick={handleLogout}>Logout</Link>
           </li>
         )}
       </ul>

@@ -43,17 +43,7 @@ def login():
         print("User signed in successfully")
         return jsonify({"access_token": user})
     except Exception as e:
-        print("Login failed:", str(e))
         return jsonify({"error": "Login failed"}, 401)
-
-@auth_bp.route('/logout')
-def logout():
-    try:
-        auth.signOut()
-        
-        return jsonify({"message": "Logout successful"})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
 @auth_bp.route('/protected', methods=['GET'])
 def protected_route():
