@@ -5,10 +5,11 @@ from extensions import db, login_manager
 from models.user import User
 from routes import auth, data, errors
 from flask_jwt_extended import JWTManager
+from dotenv import load_dotenv
 
 def create_app(config_name='development'):
     app = Flask(__name__)
-    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+    CORS(app, resources={r"/auth/*": {"origins": "http://localhost:3000"}})  # Configure CORS
 
     if config_name == 'development':
         app.config.from_object(DevelopmentConfig)
@@ -23,6 +24,9 @@ def create_app(config_name='development'):
         
     # Configure token-based authentication
     jwt = JWTManager(app)
+    
+    # Load env variables
+    load_dotenv()
 
     # Register blueprints for routes
     app.register_blueprint(auth.auth_bp)
