@@ -1,10 +1,6 @@
 # backend/authentication.py
 import os
 import pyrebase
-from dotenv import load_dotenv
-
-# Load environment variables from .env
-load_dotenv()
 
 firebase_config = {
     'apiKey': os.getenv('FIREBASE_API_KEY'),
@@ -19,9 +15,3 @@ firebase_config = {
 
 firebase = pyrebase.initialize_app(firebase_config)
 auth = firebase.auth()
-
-email = "test1234@gmail.com"
-password = "123456"
-
-user = auth.create_user_with_email_and_password(email, password)
-print(user)

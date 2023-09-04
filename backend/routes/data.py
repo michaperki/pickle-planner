@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request
 import pyrebase
 import os
+from dotenv import load_dotenv
 
-data_bp = Blueprint('data', __name__)
+load_dotenv()
+data_bp = Blueprint('data', __name__, url_prefix="/data")
+
 
 firebase_config = {
     "apiKey": os.getenv("FIREBASE_API_KEY"),
@@ -14,7 +17,7 @@ firebase_config = {
     "appId": os.getenv("FIREBASE_APP_ID"),
     "measurementId": os.getenv("FIREBASE_MEASUREMENT_ID")
 }
-
+print(firebase_config)
 # Initialize Firebase
 firebase = pyrebase.initialize_app(firebase_config)
 database = firebase.database()
