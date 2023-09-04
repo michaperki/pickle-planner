@@ -74,24 +74,28 @@ const mockFirebaseDatabase = {
 };
 
 // Simulated API function to save a group to the Firebase-like database
-export const saveGroupToFirebase = (groupData) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            try {
-                // Simulate a unique group ID
-                const groupId = Date.now().toString();
-                const groupWithId = { id: groupId, ...groupData };
+// services/api.js
+export const saveGroupToFirebase = async (groupData) => {
+    try {
+        const response = await fetch(`${apiUrl}/api/create_group`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(groupData),
+        });
 
-                // Push the group to the simulated Firebase database
-                mockFirebaseDatabase.groups.push(groupWithId);
+        if (!response.ok) {
+            throw new Error('Error saving group to Firebase');
+        }
 
-                resolve(groupWithId);
-            } catch (error) {
-                reject(error);
-            }
-        }, apiDelay);
-    });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 };
+
 
 // Simulated API function to fetch the list of saved groups
 export const fetchSavedGroups = () => {
@@ -113,18 +117,25 @@ export const fetchSavedGroups = () => {
     });
 };
 
-export const createGameRequest = (gameData) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            try {
-                // Simulated response from the server
-                const createdGame = { id: '123', ...gameData };
-                resolve(createdGame);
-            } catch (error) {
-                reject(error);
-            }
-        }, apiDelay);
-    });
+export const createGameRequest = async (gameData) => {
+    try {
+        const response = await fetch(`${apiUrl}/api/create_game`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(gameData),
+        });
+
+        if (!response.ok) {
+            throw new Error('Error creating game');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 };
 
 // Simulated list of games

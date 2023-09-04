@@ -261,7 +261,7 @@ const Dashboard = ({ user }) => {
 
       {/* Render GamesCreatedByFriendsList */}
       <GamesCreatedByFriendsList
-        currentUser={user}
+        user={user}
         gamesCreatedByFriends={gamesCreatedByFriends}
         isLoading={isLoadingGamesCreatedByFriends}
         error={errorGamesCreatedByFriends}

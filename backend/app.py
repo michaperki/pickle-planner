@@ -9,8 +9,11 @@ from dotenv import load_dotenv
 
 def create_app(config_name='development'):
     app = Flask(__name__)
-    CORS(app, resources={r"/auth/*": {"origins": ["https://michaperki.github.io", "http://localhost:3000"]}})
-
+    CORS(app, resources={
+        r"/auth/*": {"origins": ["https://michaperki.github.io", "http://localhost:3000"]},
+        r"/api/*": {"origins": ["https://michaperki.github.io", "http://localhost:3000"]}
+    })
+    
     if config_name == 'development':
         app.config.from_object(DevelopmentConfig)
     elif config_name == 'testing':
