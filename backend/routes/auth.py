@@ -21,9 +21,8 @@ auth = firebase.auth()
 @auth_bp.route('/register', methods=['POST'])
 def register():
     # Handle user registration logic here
-    username = request.json.get('username')
-    password = request.json.get('password')
     email = request.json.get('email')  # Get the email from the request
+    password = request.json.get('password')
 
     try:
         # Create a new user with the email and password

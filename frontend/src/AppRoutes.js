@@ -11,7 +11,7 @@ function AppRoutes() {
   const { user } = useAuth();
 
   return (
-    <Router>
+    <Router basename="/pickle-planner">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
