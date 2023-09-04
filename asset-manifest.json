@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pickle-planner/static/css/main.116c3a23.css",
-    "main.js": "/pickle-planner/static/js/main.b5cf018a.js",
+    "main.js": "/pickle-planner/static/js/main.29cbcb92.js",
     "static/js/787.cda612ba.chunk.js": "/pickle-planner/static/js/787.cda612ba.chunk.js",
     "index.html": "/pickle-planner/index.html",
     "main.116c3a23.css.map": "/pickle-planner/static/css/main.116c3a23.css.map",
-    "main.b5cf018a.js.map": "/pickle-planner/static/js/main.b5cf018a.js.map",
+    "main.29cbcb92.js.map": "/pickle-planner/static/js/main.29cbcb92.js.map",
     "787.cda612ba.chunk.js.map": "/pickle-planner/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.116c3a23.css",
-    "static/js/main.b5cf018a.js"
+    "static/js/main.29cbcb92.js"
   ]
 }
