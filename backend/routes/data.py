@@ -43,3 +43,24 @@ def create_group():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@data_bp.route('/api/groups', methods=['GET'])
+def get_groups():
+    try:
+        # Get a reference to the 'groups' node in Firebase
+        groups_ref = database.child('groups')
+        
+        # Retrieve all groups from the 'groups' node
+        groups = groups_ref.get().val()
+        print(groups)
+        # Initialize an empty list to store group data
+        group_data = []
+
+        if groups:
+            # Iterate through the retrieved groups and append them to the list
+            for group_id, group in groups.items():
+                group_data.append({"id": group_id, **group})
+
+        return jsonify(group_data), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

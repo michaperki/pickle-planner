@@ -8,7 +8,7 @@ import GamesCreatedByFriendsList from './GamesCreatedByFriends';
 import {
   fetchFriendList,
   saveGroupToFirebase,
-  fetchSavedGroups,
+  fetchGroupsFromFirebase,
   createGameRequest,
   fetchCreatedGames,
   fetchGamesCreatedByFriends,
@@ -89,7 +89,7 @@ const Dashboard = ({ user }) => {
   const fetchGroups = () => {
     setIsLoadingGroups(true);
 
-    fetchSavedGroups()
+    fetchGroupsFromFirebase()
       .then((data) => {
         setGroups(data);
         setIsLoadingGroups(false);

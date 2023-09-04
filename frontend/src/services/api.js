@@ -96,25 +96,24 @@ export const saveGroupToFirebase = async (groupData) => {
     }
 };
 
+export const fetchGroupsFromFirebase = async () => {
+    try {
+        const response = await fetch(`${apiUrl}/api/groups`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-// Simulated API function to fetch the list of saved groups
-export const fetchSavedGroups = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            try {
-                // Simulated list of saved groups (you can replace this with actual data)
-                const savedGroups = [
-                    { id: '1', groupName: 'Group 1', selectedFriends: ['friend1', 'friend2'] },
-                    { id: '2', groupName: 'Group 2', selectedFriends: ['friend3', 'friend4'] },
-                    // Add more groups as needed
-                ];
+        if (!response.ok) {
+            throw new Error('Error fetching groups from Firebase');
+        }
 
-                resolve(savedGroups);
-            } catch (error) {
-                reject(error);
-            }
-        }, apiDelay);
-    });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const createGameRequest = async (gameData) => {
