@@ -15,7 +15,9 @@ const GroupList = ({ groups, isLoading, error }) => {
           {groups.map((group) => (
             <li key={group.id} className="mb-4">
               <h3 className="text-md font-medium mb-1">{group.groupName}</h3>
-              <p className="text-sm">Selected Friends: {group.selectedFriends.join(', ')}</p>
+              <p className="text-sm">
+                Selected Friends: {group.selectedFriends ? group.selectedFriends.join(', ') : ''}
+              </p>
             </li>
           ))}
         </ul>

@@ -4,7 +4,6 @@ from config import DevelopmentConfig, TestingConfig
 from extensions import login_manager, db
 from models.user import User
 from routes import auth, data, errors
-from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 
 def create_app(config_name='development'):
@@ -13,7 +12,7 @@ def create_app(config_name='development'):
         r"/auth/*": {"origins": ["https://michaperki.github.io", "http://localhost:3000"]},
         r"/api/*": {"origins": ["https://michaperki.github.io", "http://localhost:3000"]}
     })
-    
+        
     if config_name == 'development':
         app.config.from_object(DevelopmentConfig)
     elif config_name == 'testing':
@@ -25,9 +24,6 @@ def create_app(config_name='development'):
     with app.app_context():
         db.create_all()
         
-    # Configure token-based authentication
-    jwt = JWTManager(app)
-    
     # Load env variables
     load_dotenv()
 

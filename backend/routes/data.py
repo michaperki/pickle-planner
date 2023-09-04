@@ -2,10 +2,10 @@ from flask import Blueprint, jsonify, request
 import pyrebase
 import os
 from dotenv import load_dotenv
+from flask_cors import cross_origin
 
 load_dotenv()
 data_bp = Blueprint('data', __name__, url_prefix="/data")
-
 
 firebase_config = {
     "apiKey": os.getenv("FIREBASE_API_KEY"),
@@ -17,13 +17,14 @@ firebase_config = {
     "appId": os.getenv("FIREBASE_APP_ID"),
     "measurementId": os.getenv("FIREBASE_MEASUREMENT_ID")
 }
-print(firebase_config)
+
 # Initialize Firebase
 firebase = pyrebase.initialize_app(firebase_config)
 database = firebase.database()
 
 # Create a new group and save it to Firebase Realtime Database
-@data_bp.route('/api/create_group', methods=['POST'])
+@data_bp.route('/create_group', methods=['POST'])
+@cross_origin()
 def create_group():
     try:
         # Parse the request JSON data
@@ -46,7 +47,8 @@ def create_group():
     except Exception as e:
         return jsonify({'error': str(e)}, 500)
 
-@data_bp.route('/api/groups', methods=['GET'])
+@data_bp.route('/groups', methods=['GET'])
+@cross_origin()
 def get_groups():
     try:
         # Get a reference to the 'groups' node in Firebase
@@ -63,7 +65,7 @@ def get_groups():
             for group_id, group in groups.items():
                 group_data.append({"id": group_id, **group})
 
-        return jsonify(group_data), 200
+        return jsonify(group_data, 200)
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)}, 500)

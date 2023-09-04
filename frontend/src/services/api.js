@@ -77,7 +77,7 @@ const mockFirebaseDatabase = {
 // services/api.js
 export const saveGroupToFirebase = async (groupData) => {
     try {
-        const response = await fetch(`${apiUrl}/api/create_group`, {
+        const response = await fetch(`${apiUrl}/data/create_group`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export const saveGroupToFirebase = async (groupData) => {
 
 export const fetchGroupsFromFirebase = async () => {
     try {
-        const response = await fetch(`${apiUrl}/api/groups`, {
+        const response = await fetch(`${apiUrl}/data/groups`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export const fetchGroupsFromFirebase = async () => {
 
 export const createGameRequest = async (gameData) => {
     try {
-        const response = await fetch(`${apiUrl}/api/create_game`, {
+        const response = await fetch(`${apiUrl}/data/create_game`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
