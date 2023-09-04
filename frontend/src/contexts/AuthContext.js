@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-import { logoutUser } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -19,7 +18,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isAuthenticated = () => !!token; // Check if a token exists
-  const user = isAuthenticated() ? {} : null;
+  const user = isAuthenticated()
+    ? {
+        // Replace this with your actual user data
+        id: token['localId'],
+        email: token['email'],
+        // Include other user data as needed
+      }
+    : null;
 
   const value = {
     isAuthenticated,
@@ -30,4 +36,3 @@ export const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-

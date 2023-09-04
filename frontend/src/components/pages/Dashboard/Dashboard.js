@@ -15,6 +15,7 @@ import {
 } from '../../../services/api';
 
 const Dashboard = ({ user }) => {
+    
   // State for managing the group creation modal
   const [isCreatingGroup, setIsCreatingGroup] = useState(false);
   const [courtLocation, setCourtLocation] = useState('');
@@ -54,7 +55,7 @@ const Dashboard = ({ user }) => {
     setErrorGamesCreatedByFriends(null);
 
     // Fetch the list of games created by friends when needed
-    fetchGamesCreatedByFriends()
+    fetchGamesCreatedByFriends(user.id)
       .then((data) => {
         // Filter the games to include only those created by friends
         const filteredGames = data.filter((game) => game.createdBy !== user);

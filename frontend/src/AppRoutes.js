@@ -8,7 +8,7 @@ import { useAuth } from './contexts/AuthContext';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function AppRoutes() {
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Router>
@@ -17,7 +17,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/protected" element={<Dashboard user={currentUser} />} />
+        <Route path="/protected" element={<Dashboard user={user} />} />
       </Routes>
     </Router>
   );
