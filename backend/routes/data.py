@@ -38,10 +38,10 @@ def create_group():
         new_group_ref = database.child('groups').push(new_group)
 
         # Return the ID of the newly created group
-        return jsonify({'groupId': new_group_ref.key}), 201
+        return jsonify({'groupId': new_group_ref.key}, 201)
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)}, 500)
 
 @data_bp.route('/api/groups', methods=['GET'])
 def get_groups():
@@ -51,7 +51,7 @@ def get_groups():
         
         # Retrieve all groups from the 'groups' node
         groups = groups_ref.get().val()
-        print(groups)
+
         # Initialize an empty list to store group data
         group_data = []
 
