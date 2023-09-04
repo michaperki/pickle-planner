@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request
-from flask_cors import cross_origin
 import pyrebase
 import os
 
@@ -22,7 +21,6 @@ database = firebase.database()
 
 # Create a new group and save it to Firebase Realtime Database
 @data_bp.route('/api/create_group', methods=['POST'])
-@cross_origin()
 def create_group():
     try:
         # Parse the request JSON data
