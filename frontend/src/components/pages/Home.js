@@ -1,11 +1,15 @@
-// Home.js
 import React from 'react';
+import { useTheme } from '../../contexts/ThemeContext'; // Import useTheme
 
 function Home() {
-    return (
-        <h2>Home</h2>
-    )
+    const { theme } = useTheme(); // Access the theme value
 
+    return (
+        <div className={`home ${theme}`}>
+            <h2>Home</h2>
+            {/* Rest of your Home component content */}
+        </div>
+    );
 }
 
 export default Home;

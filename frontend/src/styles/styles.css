@@ -1,9 +1,36 @@
+/* styles.css */
+/* Header styles */
 header.light {
     background-color: white;
     color: black;
-}
-
-header.dark {
+  }
+  
+  header.dark {
     background-color: black;
     color: white;
-}
+  }
+  
+  /* Example: Home component styles */
+  .home.light {
+    background-color: white;
+    color: black;
+  }
+  
+  .home.dark {
+    background-color: black;
+    color: white;
+  }
+  
+  /* Example: Dashboard component styles */
+  .dashboard.light {
+    background-color: white;
+    color: black;
+  }
+  
+  .dashboard.dark {
+    background-color: black;
+    color: white;
+  }
+  
+  /* Add more styles for other components as needed */
+  
